@@ -67,4 +67,5 @@ const myStyle = computed(() => {
 input::placeholder {
   color: rgb(211, 211, 211, 0.9);
 }
+
 </style>

@@ -58,7 +58,7 @@ const componentName = computed(() => defaultTrue.value ? LoginComponent : Regist
   height: 30rem;
   background-color: #fff;
   border: 2px solid rgb(173, 216, 230, 0.6);
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0px 3px 12px rgb(173, 216, 230, 0.7);
   position: absolute;
   left: 50%;

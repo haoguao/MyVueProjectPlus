@@ -2,12 +2,12 @@
   <div class="sonContainer">
     <form class="form_1">
       <div class="input_demo input_demo_1">
-        <MyInput size="max" placeholder="请输入用户名" type="text" color="transparent">
+        <MyInput size="max" placeholder="请输入用户名" type="text" color="transparent" font-size="16px">
           <span>账号</span>
         </MyInput>
       </div>
       <div class="input_demo input_demo_2">
-        <MyInput size="max" placeholder="请输入密码" type="password" color="transparent" >
+        <MyInput size="max" placeholder="请输入密码" type="password" color="transparent" font-size="16px">
           <span>密码</span>
         </MyInput>
       </div>
@@ -51,6 +51,7 @@ import MyInput from '@/components/MyInput.vue';
 
 
 .input_demo :deep(.myInput) {
+  height: 48px;
   width: 400px;
   border: 1px solid rgb(185, 185, 185);
 }
@@ -65,7 +66,7 @@ import MyInput from '@/components/MyInput.vue';
 }
 
 .input_demo :deep(input::placeholder) {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
 }
 
