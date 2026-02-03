@@ -1,8 +1,26 @@
-* {
+* ,
+::after,
+::before{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+a {
   text-decoration: none;
+}
+
+input,
+button {
+  outline: none;
+  border: none;
+  vertical-align: middle;
 }
 
 html {

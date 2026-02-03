@@ -1,0 +1,77 @@
+<template>
+  <button class="top-button" :style="newStyle" :class="props.className" v-bind="$attrs" @click="emits('click')">
+    <slot name="default" />
+  </button>
+</template>
+
+
+<script setup>
+import { computed } from 'vue';
+
+defineOptions({ inheritAttrs: false })
+const emits = defineEmits(['click'])
+const props = defineProps({
+  buttonSize: {
+    type: String,
+    default: 'mid',
+    require: true,
+    validator: (value) => {
+      return ['min', 'mid', 'big', 'max'].includes(value);
+    }
+  },
+  color: {
+    type: String,
+    require: true,
+  },
+  fontSize: {
+    type: String,
+    default: '16px'
+  },
+  fontColor: {
+    type: String,
+    default: '#fff'
+  },
+  className: {
+    type: String
+  }
+})
+
+const newStyle = computed(() => {
+  const fontSize = props.fontSize
+  const color = props.fontColor
+  const backgroundColor = props.color
+  let width;
+  let height;
+  if (props.buttonSize === 'min') {
+    width = '40px';
+    height = '20px';
+  } else if (props.buttonSize === 'mid') {
+    width = '50px';
+    height = '23px';
+  } else if (props.buttonSize === 'big') {
+    width = '70px';
+    height = '33px';
+  } else {
+    width = '200px';
+    height = '40px';
+  }
+  return {
+    fontSize,
+    color,
+    backgroundColor,
+    width,
+    height
+  }
+})
+
+
+
+
+</script>
+
+<style scoped>
+.top-button {
+  border-radius: 5px;
+  background-color: transparent;
+}
+</style>

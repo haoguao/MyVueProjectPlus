@@ -25,7 +25,7 @@ const router = createRouter({
     },
     {
       path: '/',
-      redirect: 'home'
+      redirect: 'signInUp'
     },
 
   ],

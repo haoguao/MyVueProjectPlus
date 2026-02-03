@@ -1,9 +1,11 @@
 import api from "../api";
 
-export const loginReq = async (params) => {
+export const registerReq = async (params) => {
+
   const response = await api.post(
-    '/login',
+    '/register',
     params,
   )
   return response.data
+
 }
