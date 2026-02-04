@@ -29,7 +29,7 @@ import MyInput from '@/components/MyInput.vue';
 
 <style scoped>
 .sonContainer {
-  height: 130px;
+  height: 170px;
   position: relative;
 }
 

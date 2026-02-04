@@ -16,7 +16,7 @@ defineOptions({ inheritAttrs: false })
 const props = defineProps({
   size: {
     type: String,
-    require: true,
+    required: true,
     validator: (value) => {
       return ['min', 'mid', 'max'].includes(value);
     }

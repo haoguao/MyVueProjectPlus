@@ -14,14 +14,14 @@ const props = defineProps({
   buttonSize: {
     type: String,
     default: 'mid',
-    require: true,
+    required: true,
     validator: (value) => {
       return ['min', 'mid', 'big', 'max'].includes(value);
     }
   },
   color: {
     type: String,
-    require: true,
+    required: true,
   },
   fontSize: {
     type: String,
