@@ -85,7 +85,8 @@ const sumbitRegister = async () => {
     try {
       const registerResponse = await registerStore.register(registerStore.registerForm)
       if (registerResponse.code === 200) {
-        ElMessage.success('注册成功, 请返回登录')
+        ElMessage.success('注册成功')
+        router.push({ name: 'home' })
       } else {
         ElMessage.error('系统繁忙请稍后注册')
       }
@@ -108,9 +109,8 @@ const sumbitRegister = async () => {
   width: 53rem;
   height: 30rem;
   background-color: #ffffff;
-  border: 2px solid rgb(173, 216, 230, 0.6);
   border-radius: 12px;
-  box-shadow: 0px 3px 12px rgb(173, 216, 230, 0.7);
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
   position: absolute;
   left: 50%;
   top: 50%;
