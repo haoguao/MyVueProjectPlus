@@ -59,5 +59,4 @@ export const useRegisterStore = defineStore('register',()=>{
     judjeUsername,
     register
   }
-
 })

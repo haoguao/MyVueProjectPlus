@@ -27,7 +27,14 @@ const router = createRouter({
     },
     {
       path: '/',
-      redirect: 'signInUp'//这里也可以判断是否登录来切换跳转路由
+      redirect: '/home'
+      // (to) => {
+      //   if () {//这里判断用户是否登录，来切换跳转方向
+      //     return {name: 'home'}
+      //   } else {
+      //     return {name: 'signInUp'}
+      //   }
+      // }
     },
 
   ],

@@ -42,19 +42,19 @@ const newStyle = computed(() => {
   let width;
   let height;
   if (props.buttonSize === 'min') {
-    width = '40px';
+    width = '70px';
     height = '20px';
   } else if (props.buttonSize === 'mid') {
-    width = '50px';
-    height = '23px';
+    width = '100px';
+    height = '30px';
   } else if (props.buttonSize === 'big') {
-    width = '70px';
-    height = '33px';
+    width = '150px';
+    height = '38px';
   } else if (props.buttonSize === 'max') {
     width = '200px';
     height = '40px';
   } else {
-    width = '290px';
+    width = '245px';
     height = '40px';
   }
   return {

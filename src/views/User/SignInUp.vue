@@ -1,12 +1,12 @@
 <template>
   <div class="container">
     <div class="top">
-      <MyButton button-size="max" font-size="23px" font-color="#000"
+      <MyButton button-size="big" font-size="23px" font-color="#000"
         :class="['myButton', { 'active': !defaultTrue, 'disable': defaultTrue }]" :disabled="defaultTrue"
         @click="change">
         密码登录
       </MyButton>
-      <MyButton button-size="max" font-size="23px" font-color="#000"
+      <MyButton button-size="big" font-size="23px" font-color="#000"
         :class="['myButton', { 'active': defaultTrue, 'disable': !defaultTrue }]" :disabled="!defaultTrue"
         @click="change">
         账户注册
@@ -20,14 +20,14 @@
     <div class="bottom">
       <template v-if="defaultTrue">
         <MyButton font-color="blue" class="button_1" button-size="proMax"
-          color="rgba(58, 183, 255, 0.6)" font-size="18px" fontColor="#fff"
+          color="rgba(58, 183, 255, 0.7)" font-size="18px" fontColor="#fff"
           @click="submitLogin">
           登录
         </MyButton>
       </template>
       <template v-else>
         <MyButton font-color="blue" class="button_1" button-size="proMax"
-          color="rgba(58, 183, 255, 0.6)" font-size="18px" fontColor="#fff"
+          color="rgba(58, 183, 255, 0.7)" font-size="18px" fontColor="#fff"
           @click="sumbitRegister">
           注册
         </MyButton>
