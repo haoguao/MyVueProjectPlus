@@ -14,19 +14,21 @@
     </div>
     <div class="mid">
       <KeepAlive>
-        <component :is="componentName" />
+        <component :is="componentName"/>
       </KeepAlive>
     </div>
     <div class="bottom">
       <template v-if="defaultTrue">
         <MyButton font-color="blue" class="button_1" button-size="max"
-          color="rgba(58, 183, 255, 0.6)" fontColor="#fff">
+          color="rgba(58, 183, 255, 0.6)" fontColor="#fff"
+          @click="submitLogin">
           登录
         </MyButton>
       </template>
       <template v-else>
         <MyButton font-color="blue" class="button_1" button-size="max"
-          color="rgba(58, 183, 255, 0.6)" fontColor="#fff">
+          color="rgba(58, 183, 255, 0.6)" fontColor="#fff"
+          @click="sumbitRegister">
           注册
         </MyButton>
       </template>
@@ -36,10 +38,16 @@
 
 
 <script setup>
-import MyButton from '@/components/MyButton.vue';
+import {ElMessage} from 'element-plus'
 import { computed, ref } from 'vue';
+import { useLoginStore } from '@/stores/loginStore';
+
+import MyButton from '@/components/MyButton.vue';
 import LoginComponent from './Login/LoginComponent.vue';
 import RegisterComponent from './Register/RegisterComponent.vue';
+import { useRegisterStore } from '@/stores/registerStore';
+import router from '@/router';
+
 //切换可点击按钮
 const defaultTrue = ref(true)
 const change = () => {
@@ -47,6 +55,41 @@ const change = () => {
 }
 //切换Login，Register组件
 const componentName = computed(() => defaultTrue.value ? LoginComponent : RegisterComponent)
+
+//判断点击事件后是否提交登录表单
+const submitLogin = () => {
+  if (useLoginStore().judjePassword() && useLoginStore().judjeUsername()) {
+    try {
+      const loginResponse = useLoginStore().login(useLoginStore().loginForm)
+      if (loginResponse.code === 200) {
+        ElMessage.success('登录成功')
+        router.push({name: 'home'})
+      }
+    } catch (error) {
+      ElMessage.error('登录失败', error.message)
+    }
+  } else {
+    ElMessage.error('用户名或密码错误')
+  }
+}
+
+//判断点击事件后是否提交注册表单
+const sumbitRegister = () => {
+  if (useRegisterStore().judjePassword() && useRegisterStore().judjeRePassword()
+      && useRegisterStore().judjeUsername()) {
+        try {
+          const registerResponse = useRegisterStore().register(useRegisterStore().registerForm)
+          if(registerResponse.code === 200){
+            ElMessage.success('注册成功, 请返回登录')
+          }
+        } catch (error) {
+            ElMessage.error('注册失败', error.message)
+        }
+      } else {
+        ElMessage.error('请再次确认信息')
+      }
+
+}
 
 
 

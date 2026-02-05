@@ -9,6 +9,7 @@ const router = createRouter({
   routes: [
     {
       path: '/home',//主页面
+      name: 'home',
       component: BaseLayout,
       meta: {
         title: '主页',
@@ -17,6 +18,7 @@ const router = createRouter({
     },
     {
       path: '/signInUp',//登录或注册的页面
+      name: 'signInUp',
       component: SignInUp,
       meta: {
         title: 'signInUp',
@@ -25,7 +27,7 @@ const router = createRouter({
     },
     {
       path: '/',
-      redirect: 'signInUp'
+      redirect: 'signInUp'//这里也可以判断是否登录来切换跳转路由
     },
 
   ],

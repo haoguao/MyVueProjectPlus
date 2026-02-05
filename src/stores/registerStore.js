@@ -2,7 +2,7 @@ import { registerAPI } from "@/apis";
 import { defineStore } from "pinia";
 import { reactive } from "vue";
 
-export const useLoginStore = defineStore('register',()=>{
+export const useRegisterStore = defineStore('register',()=>{
 
   const registerForm = reactive({
     username: '',

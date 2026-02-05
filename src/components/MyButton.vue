@@ -21,7 +21,6 @@ const props = defineProps({
   },
   color: {
     type: String,
-    required: true,
   },
   fontSize: {
     type: String,

@@ -2,12 +2,14 @@
   <div class="sonContainer">
     <form class="form_1">
       <div class="input_demo input_demo_1">
-        <MyInput size="max" placeholder="请输入用户名" type="text" color="transparent" font-size="16px">
+        <MyInput size="max" placeholder="请输入用户名" type="text" color="transparent" font-size="16px"
+          v-model="loginForm.userName">
           <span>账号</span>
         </MyInput>
       </div>
       <div class="input_demo input_demo_2">
-        <MyInput size="max" placeholder="请输入密码" type="password" color="transparent" font-size="16px">
+        <MyInput size="max" placeholder="请输入密码" type="password" color="transparent" font-size="16px"
+          v-model="loginForm.password">
           <span>密码</span>
         </MyInput>
       </div>
@@ -18,6 +20,24 @@
 
 <script setup>
 import MyInput from '@/components/MyInput.vue';
+import { useLoginStore } from '@/stores/loginStore';
+import { reactive, watch } from 'vue';
+
+const loginForm = reactive({
+  userName: '',
+  password: ''
+});
+
+watch([() => loginForm.userName, () => loginForm.password],
+  (newV) => {
+    useLoginStore().loginForm.username = newV[0];
+    useLoginStore().loginForm.password = newV[1];
+  })
+
+
+
+
+
 
 
 </script>
@@ -69,5 +89,4 @@ import MyInput from '@/components/MyInput.vue';
   font-size: 16px;
   font-weight: 500;
 }
-
 </style>
