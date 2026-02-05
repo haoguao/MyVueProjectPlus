@@ -15,13 +15,12 @@ export const useLoginStore = defineStore('login',()=>{
     if(username.trim() === '') {
       return false
     } else {
-      loginForm.username = username
       return true
     }
   }
 
   const judjePassword = (password)=>{
-    if(typeof username !== 'string') {
+    if(typeof password !== 'string') {
       return false
     }
     if(password.trim() === '') {
@@ -29,13 +28,12 @@ export const useLoginStore = defineStore('login',()=>{
     } else if(password.length < 6 || password.length > 20) {
       return false
     } else {
-      loginForm.password = password
       return true
     }
   }
 
-  function login(params) {
-    return loginAPI.loginReq(params)
+  async function login(params) {
+    return await loginAPI.loginReq(params)
   }
 
 

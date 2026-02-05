@@ -9,11 +9,11 @@
 import { computed } from 'vue';
 
 defineOptions({ inheritAttrs: false })
+//向上提交点击事件
 const emits = defineEmits(['click'])
 const props = defineProps({
   buttonSize: {
     type: String,
-    default: 'mid',
     required: true,
     validator: (value) => {
       return ['min', 'mid', 'big', 'max'].includes(value);

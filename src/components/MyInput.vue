@@ -4,7 +4,9 @@
     <input :type="props.type" :placeholder="props.placeholder"
       :style="myStyle" :class="props.className"
       autocomplete=""
-      v-bind="$attrs">
+      v-bind="$attrs"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)">
   </div>
 </template>
 
@@ -13,6 +15,7 @@
 import { computed } from 'vue';
 
 defineOptions({ inheritAttrs: false })
+defineEmits(['update:modelValue'])
 const props = defineProps({
   size: {
     type: String,
@@ -28,13 +31,19 @@ const props = defineProps({
     type: String
   },
   placeholder: {
-    type: String
+    type: String,
+    default: ''
   },
   className: {
     type: String
   },
   type: {
-    type: String
+    type: String,
+    default: 'text'
+  },
+  modelValue: {
+    type: String,
+    default: ''
   }
 })
 

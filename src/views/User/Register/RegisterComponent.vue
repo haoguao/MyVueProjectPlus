@@ -2,17 +2,20 @@
   <div class="sonContainer">
     <form class="form_1">
       <div class="input_demo input_demo_1">
-        <MyInput size="max" placeholder="请输入用户名" color="transparent" type="text" font-size="16px">
+        <MyInput size="max" placeholder="请输入用户名" color="transparent" type="text" font-size="16px"
+          v-model="registerForm.username">
           <span>账号</span>
         </MyInput>
       </div>
       <div class="input_demo input_demo_2">
-        <MyInput size="max" placeholder="请输入密码" color="transparent" type="password" font-size="16px">
+        <MyInput size="max" placeholder="请输入密码" color="transparent" type="password" font-size="16px"
+          v-model="registerForm.password">
           <span>密码</span>
         </MyInput>
       </div>
       <div class="input_demo input_demo_3">
-        <MyInput size="max" placeholder="请再次确认密码" color="transparent" type="password" font-size="16px">
+        <MyInput size="max" placeholder="请再次确认密码" color="transparent" type="password" font-size="16px"
+          v-model="registerForm.rePassword">
           <span>确认</span>
         </MyInput>
       </div>
@@ -23,6 +26,23 @@
 
 <script setup>
 import MyInput from '@/components/MyInput.vue';
+import { reactive, watch } from 'vue';
+import { useRegisterStore } from '@/stores/registerStore.js';
+
+const registerStore = useRegisterStore();
+const registerForm = reactive({
+  username: '',
+  password: '',
+  rePassword: ''
+});
+
+watch([() => registerForm.username, () => registerForm.password, () => registerForm.rePassword],
+  (newV) => {
+    registerStore.registerForm.username = newV[0];
+    registerStore.registerForm.password = newV[1];
+    registerStore.registerForm.rePassword = newV[2];
+  })
+
 
 
 </script>

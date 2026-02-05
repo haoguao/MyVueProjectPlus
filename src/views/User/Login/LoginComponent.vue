@@ -23,6 +23,7 @@ import MyInput from '@/components/MyInput.vue';
 import { useLoginStore } from '@/stores/loginStore';
 import { reactive, watch } from 'vue';
 
+const loginStore = useLoginStore();
 const loginForm = reactive({
   userName: '',
   password: ''
@@ -30,8 +31,8 @@ const loginForm = reactive({
 
 watch([() => loginForm.userName, () => loginForm.password],
   (newV) => {
-    useLoginStore().loginForm.username = newV[0];
-    useLoginStore().loginForm.password = newV[1];
+    loginStore.loginForm.username = newV[0];
+    loginStore.loginForm.password = newV[1];
   })
 
 

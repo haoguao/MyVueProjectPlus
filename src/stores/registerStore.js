@@ -7,7 +7,7 @@ export const useRegisterStore = defineStore('register',()=>{
   const registerForm = reactive({
     username: '',
     password: '',
-    //rePassword: ''
+    rePassword: ''
   })
 
   const judjeUsername = (username)=>{
@@ -17,13 +17,12 @@ export const useRegisterStore = defineStore('register',()=>{
     if(username.trim() === '') {
       return false
     } else {
-      registerForm.username = username
       return true
     }
   }
 
   const judjePassword = (password)=>{
-    if(typeof username !== 'string') {
+    if(typeof password !== 'string') {
       return false
     }
     if(password.trim() === '') {
@@ -31,13 +30,12 @@ export const useRegisterStore = defineStore('register',()=>{
     } else if(password.length < 6 || password.length > 20) {
       return false
     } else {
-      registerForm.password = password
       return true
     }
   }
 
   const judjeRePassword = (rePassword)=>{
-    if(typeof username !== 'string') {
+    if(typeof rePassword !== 'string') {
       return false
     }
     if(rePassword.trim() === '') {
@@ -49,8 +47,8 @@ export const useRegisterStore = defineStore('register',()=>{
     }
   }
 
-  function register(params) {
-    return registerAPI.registerReq(params)
+  async function register(params) {
+    return await registerAPI.registerReq(params)
   }
 
 
