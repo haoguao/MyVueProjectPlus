@@ -108,7 +108,7 @@ const sumbitRegister = async () => {
 
 <style scoped>
 .container {
-  width: 63rem;
+  width: 65rem;
   height: 38rem;
   background-color: #ffffff;
   border-radius: 12px;
@@ -158,7 +158,7 @@ const sumbitRegister = async () => {
   width: 100%;
   position: relative;
   top: 15%;
-  left: 10%;
+  left: 11%;
 }
 
 .bottom {
@@ -173,5 +173,10 @@ const sumbitRegister = async () => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  transition: box-shadow 0.5s;
+}
+
+.button_1:hover {
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
 }
 </style>
