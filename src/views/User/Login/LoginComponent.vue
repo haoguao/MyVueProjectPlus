@@ -74,7 +74,7 @@ watch([() => loginForm.userName, () => loginForm.password],
 .input_demo :deep(.myInput) {
   height: 48px;
   width: 400px;
-  border: 1px solid rgb(185, 185, 185);
+  border: 1px solid rgb(185, 185, 185, 0.6);
 }
 
 .input_demo_1 :deep(.myInput) {
@@ -90,4 +90,11 @@ watch([() => loginForm.userName, () => loginForm.password],
   font-size: 16px;
   font-weight: 500;
 }
+
+:deep(.myInput) > input[type="text"]:focus::placeholder,
+:deep(.myInput) > input[type="password"]:focus::placeholder {
+  color: rgba(58, 183, 255, 0.4);
+  font-weight: 700;
+}
+
 </style>

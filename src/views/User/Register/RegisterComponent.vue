@@ -3,18 +3,21 @@
     <form class="form_1">
       <div class="input_demo input_demo_1">
         <MyInput size="max" placeholder="请输入用户名" color="transparent" type="text" font-size="16px"
+          class="input_demo_class"
           v-model="registerForm.username">
           <span>账号</span>
         </MyInput>
       </div>
       <div class="input_demo input_demo_2">
         <MyInput size="max" placeholder="请输入密码" color="transparent" type="password" font-size="16px"
+          class="input_demo_class"
           v-model="registerForm.password">
           <span>密码</span>
         </MyInput>
       </div>
       <div class="input_demo input_demo_3">
         <MyInput size="max" placeholder="请再次确认密码" color="transparent" type="password" font-size="16px"
+          class="input_demo_class"
           v-model="registerForm.rePassword">
           <span>确认</span>
         </MyInput>
@@ -47,7 +50,7 @@ watch([() => registerForm.username, () => registerForm.password, () => registerF
 
 </script>
 
-<style scoped>
+<style scoped >
 .sonContainer {
   height: 170px;
   position: relative;
@@ -77,7 +80,7 @@ watch([() => registerForm.username, () => registerForm.password, () => registerF
 .input_demo :deep(.myInput) {
   height: 48px;
   width: 400px;
-  border: 1px solid rgb(185, 185, 185);
+  border: 1px solid rgb(185, 185, 185, 0.6);
 }
 
 .input_demo_1 :deep(.myInput) {
@@ -99,5 +102,12 @@ watch([() => registerForm.username, () => registerForm.password, () => registerF
   font-size: 16px;
   font-weight: 500;
 }
+
+:deep(.myInput) > input[type="text"]:focus::placeholder,
+:deep(.myInput) > input[type="password"]:focus::placeholder {
+  color: rgba(58, 183, 255, 0.4);
+  font-weight: 700;
+}
+
 
 </style>

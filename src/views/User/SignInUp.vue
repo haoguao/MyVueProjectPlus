@@ -1,12 +1,12 @@
 <template>
   <div class="container">
     <div class="top">
-      <MyButton button-size="max" font-size="22px" font-color="#000"
+      <MyButton button-size="max" font-size="23px" font-color="#000"
         :class="['myButton', { 'active': !defaultTrue, 'disable': defaultTrue }]" :disabled="defaultTrue"
         @click="change">
         密码登录
       </MyButton>
-      <MyButton button-size="max" font-size="22px" font-color="#000"
+      <MyButton button-size="max" font-size="23px" font-color="#000"
         :class="['myButton', { 'active': defaultTrue, 'disable': !defaultTrue }]" :disabled="!defaultTrue"
         @click="change">
         账户注册
@@ -19,13 +19,15 @@
     </div>
     <div class="bottom">
       <template v-if="defaultTrue">
-        <MyButton font-color="blue" class="button_1" button-size="max" color="rgba(58, 183, 255, 0.6)" fontColor="#fff"
+        <MyButton font-color="blue" class="button_1" button-size="proMax"
+          color="rgba(58, 183, 255, 0.6)" font-size="18px" fontColor="#fff"
           @click="submitLogin">
           登录
         </MyButton>
       </template>
       <template v-else>
-        <MyButton font-color="blue" class="button_1" button-size="max" color="rgba(58, 183, 255, 0.6)" fontColor="#fff"
+        <MyButton font-color="blue" class="button_1" button-size="proMax"
+          color="rgba(58, 183, 255, 0.6)" font-size="18px" fontColor="#fff"
           @click="sumbitRegister">
           注册
         </MyButton>
@@ -106,11 +108,11 @@ const sumbitRegister = async () => {
 
 <style scoped>
 .container {
-  width: 53rem;
-  height: 30rem;
+  width: 63rem;
+  height: 38rem;
   background-color: #ffffff;
   border-radius: 12px;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
   position: absolute;
   left: 50%;
   top: 50%;
@@ -135,32 +137,34 @@ const sumbitRegister = async () => {
 }
 
 .top {
-  flex: 3;
   display: flex;
   align-items: center;
   position: relative;
+  top: 13%;
 }
 
 .top::before {
   position: absolute;
   content: "";
-  width: 2px;
-  height: 35px;
-  background-color: rgb(211, 211, 211, 0.7);
+  width: 2.5px;
+  height: 21px;
+  background-color: rgb(211, 211, 211, 0.5);
   left: 50%;
-  top: 33%;
+  top: 27%;
   border-radius: 1px;
 }
 
 .mid {
-  flex: 4;
   width: 100%;
+  position: relative;
+  top: 15%;
+  left: 10%;
 }
 
 .bottom {
-  flex: 3;
   width: 100%;
   position: relative;
+  top: 24%;
 }
 
 .button_1 {

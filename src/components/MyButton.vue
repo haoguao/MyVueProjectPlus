@@ -16,7 +16,7 @@ const props = defineProps({
     type: String,
     required: true,
     validator: (value) => {
-      return ['min', 'mid', 'big', 'max'].includes(value);
+      return ['min', 'mid', 'big', 'max', 'proMax'].includes(value);
     }
   },
   color: {
@@ -50,8 +50,11 @@ const newStyle = computed(() => {
   } else if (props.buttonSize === 'big') {
     width = '70px';
     height = '33px';
-  } else {
+  } else if (props.buttonSize === 'max') {
     width = '200px';
+    height = '40px';
+  } else {
+    width = '290px';
     height = '40px';
   }
   return {
