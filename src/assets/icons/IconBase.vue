@@ -30,7 +30,8 @@ const iconStyle = computed(()=> {
   const {size, color} = props;
   const iconSize = typeof size === 'number' ? `${size}px`:size
   return {
-    fontSize: iconSize,
+    width: iconSize,
+    height: iconSize,
     color: color,
     display: "inline-block",
     lineHeight: 1
