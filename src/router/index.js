@@ -1,3 +1,4 @@
+import { useTokenStore } from '@/stores/tokenStore'
 import BaseLayout from '@/views/Layout/BaseLayout.vue'
 import SignInUp from '@/views/User/SignInUp.vue'
 import { createRouter, createWebHistory } from 'vue-router'
@@ -36,8 +37,28 @@ const router = createRouter({
       //   }
       // }
     },
+    {
+      path: '/:pathMatch(.*)',
+      name: '404',
+      component: ()=> {import('@/views/404/indexPage.vue')}
+    }
 
   ],
 })
+
+router.beforeEach((to, from, next)=> {
+  const tokenStore = useTokenStore()
+  if (to.meta.auth) {//需要登录
+    if (tokenStore.isEmptyToken) {//token为空
+      router.push({name: 'signInUp'})
+    } else {//token存在，但不知道是否过期，只有当发起一个新的请求之后由后端返回的状态码在相响应拦截器处理
+      next()
+    }
+  } else {
+    next()
+  }
+
+})
+
 
 export default router

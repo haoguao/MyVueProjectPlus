@@ -1,5 +1,5 @@
 <template>
-  <div class="navContainer" ref="navContainer">
+  <div class="navContainer" >
     <div class="nav_logo_active">
       <div class="logo">
         <span v-if="show">logo</span>
@@ -10,16 +10,16 @@
     </div>
 
 
-    <div class="nav_list_container" ref="navListContainer">
+    <div class="nav_list_container" >
 
       <div class="daily_plan">
-        icon-<span>daily_plan</span>
+        icon-<span v-if="show">daily_plan</span>
       </div>
 
       <div class="hiden_daily_plan">
       </div>
 
-      <div class="list_content" ref="listContent">
+      <div class="list_content" >
         <template v-for="value in source" :key="value">
           <div class="list_item">
             icon-<span v-if="show">{{ value }}</span>
@@ -39,22 +39,17 @@
 
 <script setup>
 import IconSidebar from '@/assets/icons/IconOther/IconSidebar.vue';
-import { ref, useTemplateRef } from 'vue';
+import { ref } from 'vue';
 
 const source = ['a', 'b', 'c', 'd']
 
 
 const show = ref(true)
-const listContentRef = useTemplateRef('listContent')
-const navContainerRef = useTemplateRef('navContainer')
-const navListContainerRef = useTemplateRef('navListContainer')
+// const listContentRef = useTemplateRef('listContent')
+// const navContainerRef = useTemplateRef('navContainer')
+// const navListContainerRef = useTemplateRef('navListContainer')
 const hidenNav = () => {
-
-  navContainerRef.value.style.width = '70px'
-  navContainerRef.value.style.height = '400px'
-  listContentRef.value.style.height = '200px'
-  navListContainerRef.value.style.height = '100px'
-  show.value = false
+  show.value = !show.value
 }
 
 

@@ -5,5 +5,5 @@ export const loginReq = async (params) => {
     '/login',
     params,
   )
-  return response.data
+  return response//统一返回response，其中response.data为Result对象
 }

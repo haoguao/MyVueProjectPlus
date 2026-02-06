@@ -47,6 +47,7 @@ import LoginComponent from './Login/LoginComponent.vue';
 import RegisterComponent from './Register/RegisterComponent.vue';
 import { useRegisterStore } from '@/stores/registerStore';
 import router from '@/router';
+import { useTokenStore } from '@/stores/tokenStore';
 
 //切换可点击按钮
 const defaultTrue = ref(true)
@@ -63,7 +64,9 @@ const submitLogin = async () => {
     && loginStore.judjeUsername(loginStore.loginForm.username)) {
     try {
       const loginResponse = await loginStore.login(loginStore.loginForm)
-      if (loginResponse.code === 200) {
+      if (loginResponse.status === 200) {
+        //存储token
+        useTokenStore().token = loginResponse.data.token
         ElMessage.success('登录成功')
         router.push({ name: 'home' })
       } else {
@@ -86,8 +89,10 @@ const sumbitRegister = async () => {
     && registerStore.judjeUsername(registerStore.registerForm.username)) {
     try {
       const registerResponse = await registerStore.register(registerStore.registerForm)
-      if (registerResponse.code === 200) {
+      if (registerResponse.status === 200) {
         ElMessage.success('注册成功')
+        //存储token
+        useTokenStore().token = registerResponse.data.token
         router.push({ name: 'home' })
       } else {
         ElMessage.error('系统繁忙请稍后注册')
