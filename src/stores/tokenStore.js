@@ -3,31 +3,53 @@ import { ref } from "vue";
 
 
 export const useTokenStore = defineStore('token', () => {
-  const token = ref('')
+  const accessToken = ref('')
+  const refreshToken = ref('')
 
-
-  const isEmptyToken = () => {
-    if (token.value === '') {
+  //判断是否为空
+  const isEmptyAccessToken = () => {
+    if (accessToken.value === '') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+    const isEmptyRefreshToken = () => {
+    if (refreshToken.value === '') {
       return true;
     } else {
       return false;
     }
   }
 
+
   //拼接产生可用的token参数
-  const concatTokenParam = (token) => {
-    return 'Bearer ' + token
+  const concatAccessToken = (accessToken) => {
+    return 'Bearer ' + accessToken
+  }
+  const concatRefreshToken = (refreshToken) => {
+    return 'Bearer ' + refreshToken
   }
 
-  const clearToken = () => {
-    token.value = ''
+  //清除token
+  const clearAccessToken = () => {
+    accessToken.value = ''
   }
+
+  const clearRefreshToken = () => {
+    refreshToken.value = ''
+  }
+
 
 
   return {
-    token,
-    isEmptyToken,
-    concatTokenParam,
-    clearToken
+    accessToken,
+    refreshToken,
+    isEmptyAccessToken,
+    isEmptyRefreshToken,
+    concatAccessToken,
+    concatRefreshToken,
+    clearAccessToken,
+    clearRefreshToken
   }
 })

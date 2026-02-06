@@ -65,8 +65,9 @@ const submitLogin = async () => {
     try {
       const loginResponse = await loginStore.login(loginStore.loginForm)
       if (loginResponse.status === 200) {
-        //存储token
-        useTokenStore().token = loginResponse.data.token
+        //存储后端传来的token
+        useTokenStore().accessToken = loginResponse.data.accessToken
+        useTokenStore().refreshToken = loginResponse.data.refreshToken
         ElMessage.success('登录成功')
         router.push({ name: 'home' })
       } else {
@@ -91,8 +92,9 @@ const sumbitRegister = async () => {
       const registerResponse = await registerStore.register(registerStore.registerForm)
       if (registerResponse.status === 200) {
         ElMessage.success('注册成功')
-        //存储token
-        useTokenStore().token = registerResponse.data.token
+        //存储后端传来的token
+        useTokenStore().accessToken = registerResponse.data.accessToken
+        useTokenStore().refreshToken = registerResponse.data.refreshToken
         router.push({ name: 'home' })
       } else {
         ElMessage.error('系统繁忙请稍后注册')
