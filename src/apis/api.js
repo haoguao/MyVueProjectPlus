@@ -24,10 +24,10 @@ api.interceptors.request.use(
     if (whiteList.includes(config.url)) {//若为可放行API
       return config
     }
-    if (!tokenStore.isEmptyAccessToken) {//access不空直接放行
+    if (!tokenStore.isEmptyAccessToken) {//accesstoken不空直接放行
       config.headers.Authorization = tokenStore.concatAccessToken(tokenStore.accessToken)
     }
-    //对于仅access为空，和两个token均为空的由后端返回401状态码，在相应拦截器处理
+    //对于仅access为空，或两个token均为空的由后端返回401状态码，在相应拦截器处理
     return config
   },
 
@@ -102,16 +102,3 @@ export default api
 
 
 
-
-// if (tokenStore.isEmptyAccessToken && tokenStore.isEmptyRefreshToken) {//两个token均为空
-//         return Promise.reject(new Error("请求需要token"))//返回的异常由响应拦截器接收并处理
-//       } else if (tokenStore.isEmptyAccessToken && ! tokenStore.isEmptyRefreshToken) {//access为空
-//         //携带refresh请求新access
-//         waitList.push(config)
-//       } else {//refresh为空 和 两个token均不空直接放行来保证用户体验
-//         config.headers.Authorization = tokenStore.concatAccessToken(tokenStore.accessToken)
-//         return config
-//       }
-//     } else {//可放行API,无需添加token请求头
-//       return config
-//     }
