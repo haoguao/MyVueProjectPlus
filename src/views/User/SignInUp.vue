@@ -64,12 +64,15 @@ const submitLogin = async () => {
     && loginStore.judjeUsername(loginStore.loginForm.username)) {
     try {
       const loginResponse = await loginStore.login(loginStore.loginForm)
-      if (loginResponse.status === 200) {
+      if (loginResponse.code === "200") {
         //存储后端传来的token
+
         useTokenStore().accessToken = loginResponse.data.accessToken
         useTokenStore().refreshToken = loginResponse.data.refreshToken
+
         ElMessage.success('登录成功')
         router.push({ name: 'home' })
+
       } else {
         ElMessage.error('系统繁忙请稍后登录')
       }
@@ -90,12 +93,12 @@ const sumbitRegister = async () => {
     && registerStore.judjeUsername(registerStore.registerForm.username)) {
     try {
       const registerResponse = await registerStore.register(registerStore.registerForm)
-      if (registerResponse.status === 200) {
-        ElMessage.success('注册成功')
-        //存储后端传来的token
-        useTokenStore().accessToken = registerResponse.data.accessToken
-        useTokenStore().refreshToken = registerResponse.data.refreshToken
-        router.push({ name: 'home' })
+      console.log(registerResponse);
+
+      if (registerResponse.code === "200") {
+        //切换到登录组件
+        defaultTrue.value = true;
+        ElMessage.success('注册成功，请登录')
       } else {
         ElMessage.error('系统繁忙请稍后注册')
       }

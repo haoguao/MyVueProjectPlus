@@ -6,6 +6,6 @@ export const registerReq = async (params) => {
     '/register',
     params,
   )
-  return response
+  return response.data
 
 }

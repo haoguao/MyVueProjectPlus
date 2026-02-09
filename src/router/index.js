@@ -29,13 +29,6 @@ const router = createRouter({
     {
       path: '/',
       redirect: '/home'
-      // (to) => {
-      //   if () {//这里判断用户是否登录，来切换跳转方向
-      //     return {name: 'home'}
-      //   } else {
-      //     return {name: 'signInUp'}
-      //   }
-      // }
     },
     {
       path: '/:pathMatch(.*)',
@@ -50,7 +43,7 @@ const router = createRouter({
 router.beforeEach((to, from, next)=> {
   const tokenStore = useTokenStore()
   if (to.meta.auth) {//需要登录
-    if (tokenStore.isEmptyAccessToken && tokenStore.isEmptyRefreshToken) {//Token为空
+    if (tokenStore.isEmptyAccessToken() && tokenStore.isEmptyRefreshToken()) {//Token为空
       next({name: 'signInUp'})
     } else {//只要当发起一个新的请求之后由后端返回的状态码在相响应拦截器处理
       next()
