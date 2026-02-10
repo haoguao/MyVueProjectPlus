@@ -39,11 +39,11 @@ const router = createRouter({
   ],
 })
 
-//========仍需修改========//
+
 router.beforeEach((to, from, next)=> {
   const tokenStore = useTokenStore()
   if (to.meta.auth) {//需要登录
-    if (tokenStore.isEmptyAccessToken() && tokenStore.isEmptyRefreshToken()) {//Token为空
+    if (tokenStore.isEmptyAccessToken() && localStorage.getItem("isLogin") === null) {//两个Token为空
       next({name: 'signInUp'})
     } else {//只要当发起一个新的请求之后由后端返回的状态码在相响应拦截器处理
       next()

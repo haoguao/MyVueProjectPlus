@@ -67,17 +67,21 @@ const submitLogin = async () => {
       if (loginResponse.code === "200") {
         //存储后端传来的token
 
+        //浏览器自动存储响应头中的refreshtoken作为cookie
         useTokenStore().accessToken = loginResponse.data.accessToken
-        useTokenStore().refreshToken = loginResponse.data.refreshToken
+        console.log(useTokenStore().accessToken);
+
+        //由于refreshtoken的cookie前端js无法读取，可在localStorage存储isLogin标志是否登录
+        localStorage.setItem("isLogin", true);
 
         ElMessage.success('登录成功')
         router.push({ name: 'home' })
 
       } else {
-        ElMessage.error('系统繁忙请稍后登录')
+        ElMessage.error('登录失败')
       }
     } catch (e) {
-      ElMessage.error('登录失败')
+      ElMessage.error('系统繁忙请稍后登录')
       console.error(e)
     }
   } else {
@@ -100,10 +104,10 @@ const sumbitRegister = async () => {
         defaultTrue.value = true;
         ElMessage.success('注册成功，请登录')
       } else {
-        ElMessage.error('系统繁忙请稍后注册')
+        ElMessage.error('注册失败')
       }
     } catch (e) {
-      ElMessage.error('注册失败')
+      ElMessage.error('系统繁忙请稍后注册')
       console.error(e)
     }
   } else {

@@ -5,6 +5,7 @@ import { tokenAPI } from ".";
 const api = axios.create({
   baseURL: 'http://localhost:8080',
   timeout: 7000,
+  withCredentials: true, // 关键：允许携带Cookie（跨域时必须）
   headers: {}
 })
 
@@ -28,6 +29,7 @@ api.interceptors.request.use(
       config.headers.Authorization = tokenStore.concatAccessToken(tokenStore.accessToken)
     }
     //对于仅access为空，或两个token均为空的由后端返回401状态码，在相应拦截器处理
+
     return config
   },
 
@@ -49,6 +51,8 @@ api.interceptors.response.use(
     const tokenStore = useTokenStore()
     const originalRequest = error.config
 
+    //console.log(originalRequest);
+
     if (status === 401) {
       if(originalRequest._reject) {//拦截重试失败的请求
         return Promise.reject(new Error("Token刷新失败"))
@@ -65,10 +69,10 @@ api.interceptors.response.use(
       } else {//尚未刷新，accessToken空，refreshToken不空 和 两个token均空都可走该条件
         try {
           isRequestNow = true//标记正在请求
-          const res = await tokenAPI.tokenReq({}, tokenStore.concatRefreshToken(tokenStore.refreshToken))
-          const {newAccessToken, newRefreshToken} = res.data
-          tokenStore.accessToken =newAccessToken
-          tokenStore.refreshToken = newRefreshToken
+          //在全局配置非同源可携带cookie之后，请求自动携带refreshToken的cookie
+          const res = await tokenAPI.tokenReq()
+          const {newAccessToken} = res.data
+          tokenStore.accessToken = newAccessToken
 
           //重试并清空队列中请求
           waitQueue.forEach(req => req(newAccessToken))//req为请求重试函数
@@ -78,9 +82,9 @@ api.interceptors.response.use(
           originalRequest.headers.Authorization = tokenStore.concatAccessToken(newAccessToken)
           return api(originalRequest)
 
-        } catch (error) {//包含refresh为空,请求时返回Promise.reject，直接到该catch中处理
+        } catch (error) {//包含refresh的cookie为空,请求时返回Promise.reject，直接到该catch中处理
           tokenStore.clearAccessToken()
-          tokenStore.clearRefreshToken()
+          localStorage.setItem("isLogin", false)
           router.push({name: 'signInUp'})
           return Promise.reject(error)
         } finally {
