@@ -37,13 +37,13 @@ watch([() => loginForm.userName, () => loginForm.password],
 
 
 
-
-
-
-
 </script>
 
 <style scoped>
+span {
+  color: #00000095;
+}
+
 .sonContainer {
   height: 170px;
   position: relative;

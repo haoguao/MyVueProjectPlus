@@ -1,12 +1,12 @@
 <template>
   <div class="container">
     <div class="top">
-      <MyButton button-size="big" font-size="23px" font-color="#000"
+      <MyButton button-size="big" font-size="23px" font-color="#00000095"
         :class="['myButton', { 'active': !defaultTrue, 'disable': defaultTrue }]" :disabled="defaultTrue"
         @click="change">
         密码登录
       </MyButton>
-      <MyButton button-size="big" font-size="23px" font-color="#000"
+      <MyButton button-size="big" font-size="23px" font-color="#00000095"
         :class="['myButton', { 'active': defaultTrue, 'disable': !defaultTrue }]" :disabled="!defaultTrue"
         @click="change">
         账户注册

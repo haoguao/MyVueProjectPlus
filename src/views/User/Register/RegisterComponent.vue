@@ -51,6 +51,11 @@ watch([() => registerForm.username, () => registerForm.password, () => registerF
 </script>
 
 <style scoped >
+span {
+  color: #00000095;
+}
+
+
 .sonContainer {
   height: 170px;
   position: relative;

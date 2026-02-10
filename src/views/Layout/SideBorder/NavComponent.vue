@@ -105,9 +105,6 @@ const hidenNav = () => {
   line-height: 35px;
 }
 
-.hiden_daily_plan {
-  /*height: 300px;*/
-}
 
 .list_content {
   width: 100%;
