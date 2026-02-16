@@ -1,9 +1,11 @@
-import api from "../api";
+import api from "@/apis/api";
 
-export const loginReq = async (params) => {
+export const registerReq = async (params) => {
+
   const response = await api.post(
-    '/login',
+    '/register',
     params,
   )
   return response.data//统一返回response.data，其中response.data为Result对象
+
 }

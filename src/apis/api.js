@@ -66,7 +66,7 @@ api.interceptors.response.use(
             resolve(api(originalRequest))//api(originalRequest)会重新触发拦截链
           })
         })
-      } else {//尚未刷新，accessToken空，refreshToken不空 和 两个token均空都可走该条件
+      } else {//尚未刷新，accessToken空，refreshToken不空(刷新页面时也是这种情况) 和 两个token均空都可走该条件
         try {
           isRequestNow = true//标记正在请求
           //在全局配置非同源可携带cookie之后，请求自动携带refreshToken的cookie
@@ -75,7 +75,7 @@ api.interceptors.response.use(
           tokenStore.accessToken = newAccessToken
 
           //重试并清空队列中请求
-          waitQueue.forEach(req => req(newAccessToken))//req为请求重试函数
+          waitQueue.forEach(req => req(newAccessToken))
           waitQueue.length = 0
 
           //使用新的accessToken重试当前请求

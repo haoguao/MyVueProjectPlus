@@ -48,6 +48,7 @@ import RegisterComponent from './Register/RegisterComponent.vue';
 import { useRegisterStore } from '@/stores/registerStore';
 import router from '@/router';
 import { useTokenStore } from '@/stores/tokenStore';
+import { useUserStore } from '@/stores/userStore';
 
 //切换可点击按钮
 const defaultTrue = ref(true)
@@ -57,19 +58,22 @@ const change = () => {
 //切换Login，Register组件
 const componentName = computed(() => defaultTrue.value ? LoginComponent : RegisterComponent)
 
-//判断点击事件后是否提交登录表单
 const loginStore = useLoginStore()
+const userStore = useUserStore()
+const tokenStore = useTokenStore()
+
+//判断点击事件后是否提交登录表单
 const submitLogin = async () => {
   if (loginStore.judjePassword(loginStore.loginForm.password)
     && loginStore.judjeUsername(loginStore.loginForm.username)) {
     try {
       const loginResponse = await loginStore.login(loginStore.loginForm)
       if (loginResponse.code === "200") {
-        //存储后端传来的token
-
+        
+        //存储后端传来的token和role
         //浏览器自动存储响应头中的refreshtoken作为cookie
-        useTokenStore().accessToken = loginResponse.data.accessToken
-        console.log(useTokenStore().accessToken);
+        userStore.userRole = loginResponse.data.roleResponse.userRole
+        tokenStore.accessToken = loginResponse.data.tokenResponse.accessToken
 
         //由于refreshtoken的cookie前端js无法读取，可在localStorage存储isLogin标志是否登录
         localStorage.setItem("isLogin", true);

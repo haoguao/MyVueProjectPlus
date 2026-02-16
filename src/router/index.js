@@ -40,6 +40,9 @@ const router = createRouter({
 })
 
 
+// TODO:-------这里应该向后端请求当前用户的角色，因为页面刷新导致当前用户角色消失------//
+// TODO:-------修改accesstoken存储在本地-------//
+
 router.beforeEach((to, from, next)=> {
   const tokenStore = useTokenStore()
   if (to.meta.auth) {//需要登录

@@ -8,7 +8,7 @@ export const useLoginStore = defineStore('login',()=>{
     password: '',
   })
 
-  const judjeUsername = (username)=>{
+  const judjeUsername = (username) => {
     if(typeof username !== 'string') {
       return false
     }
