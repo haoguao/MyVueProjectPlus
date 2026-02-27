@@ -72,8 +72,11 @@ const submitLogin = async () => {
         
         //存储后端传来的token和role
         //浏览器自动存储响应头中的refreshtoken作为cookie
-        userStore.userRole = loginResponse.data.roleResponse.userRole
-        tokenStore.accessToken = loginResponse.data.tokenResponse.accessToken
+        const role = loginResponse.data.roleResponse.userRole;
+        const accessToken = loginResponse.data.tokenResponse.accessToken;
+        
+        userStore.setUserRole(role);
+        tokenStore.setAccessToken(accessToken);
 
         //由于refreshtoken的cookie前端js无法读取，可在localStorage存储isLogin标志是否登录
         localStorage.setItem("isLogin", true);

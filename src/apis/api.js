@@ -25,8 +25,8 @@ api.interceptors.request.use(
     if (whiteList.includes(config.url)) {//若为可放行API
       return config
     }
-    if (!tokenStore.isEmptyAccessToken) {//accesstoken不空直接放行
-      config.headers.Authorization = tokenStore.concatAccessToken(tokenStore.accessToken)
+    if (!tokenStore.isEmptyAccessToken()) {//accesstoken不空直接放行
+      config.headers.Authorization = tokenStore.concatAccessToken()
     }
     //对于仅access为空，或两个token均为空的由后端返回401状态码，在相应拦截器处理
 
@@ -72,14 +72,14 @@ api.interceptors.response.use(
           //在全局配置非同源可携带cookie之后，请求自动携带refreshToken的cookie
           const res = await tokenAPI.tokenReq()
           const {newAccessToken} = res.data
-          tokenStore.accessToken = newAccessToken
+          tokenStore.setAccessToken(newAccessToken)
 
           //重试并清空队列中请求
           waitQueue.forEach(req => req(newAccessToken))
           waitQueue.length = 0
 
           //使用新的accessToken重试当前请求
-          originalRequest.headers.Authorization = tokenStore.concatAccessToken(newAccessToken)
+          originalRequest.headers.Authorization = tokenStore.concatAccessToken()
           return api(originalRequest)
 
         } catch (error) {//包含refresh的cookie为空,请求时返回Promise.reject，直接到该catch中处理
